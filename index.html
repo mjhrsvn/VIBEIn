@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Player</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: images('75d0099d355b411ff8502b8a2eaacb62.jpg') center center fixed;
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+        }
+
+        #container-box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        #player-container {
+            width: 80%;
+            max-width: 400px;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #album-art {
+            max-width: 100%;
+            border-radius: 5px;
+        }
+
+        #audio-player {
+            width: 100%;
+            margin-top: 15px;
+        }
+
+        #play-pause-btn {
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        #file-input {
+            margin-top: 15px;
+        }
+
+        @media only screen and (min-width: 600px) {
+            #player-container {
+                width: 50%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div id="container-box">
+    <div id="player-container">
+        <img id="album-art" src="images/75d0099d355b411ff8502b8a2eaacb62.jpg" alt="Album Art">
+        <audio id="audio-player" controls>
+            <source src="" type="audio/mp3">
+            Your browser does not support the audio element.
+        </audio>
+        <button id="play-pause-btn" onclick="togglePlayPause()">Play</button>
+        <input type="file" id="file-input" accept="audio/*" onchange="loadAudio(this)">
+    </div>
+</div>
+
+<script>
+    var audio = document.getElementById('audio-player');
+    var playPauseBtn = document.getElementById('play-pause-btn');
+    var fileInput = document.getElementById('file-input');
+
+    function togglePlayPause() {
+        if (audio.paused) {
+            audio.play();
+            playPauseBtn.innerHTML = 'Pause';
+        } else {
+            audio.pause();
+            playPauseBtn.innerHTML = 'Play';
+        }
+    }
+
+    function loadAudio(input) {
+        var file = input.files[0];
+        var objectURL = URL.createObjectURL(file);
+        audio.src = objectURL;
+        playPauseBtn.innerHTML = 'Play';
+        audio.pause(); // Pause the audio when a new file is selected
+    }
+</script>
+
+</body>
+</html>
+
+
+
+
